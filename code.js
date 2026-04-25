@@ -1,54 +1,35 @@
+let number = Math.floor(Math.random() *100) + 1
 
-
-let number = Math.floor(Math.random() * 100) + 1
 let responseEl = document.getElementById("response")
-let attemptsEl = document.getElementById("attempts")
+let attemptEl = document.getElementById("attempts")
+let attempt = 0
 
-let attempts = 0
 
 function loadguess(){
-    let rawInput = document.getElementById("input-el").value
-let guess =  Number(rawInput)
+
+let guess = Number(document.getElementById("input-el").value)
 
 
-if(rawInput === ""){
-        responseEl.innerText = "Please enter a number!"
-        responseEl.style.color = "red"
-        return  
-    }
-
-    if(guess === 0){
-        responseEl.innerText = "Please enter a valid number!"
-        responseEl.style.color = "red"
-        return  
-    }
-
-    if(!Number.isInteger(guess)){
-//  ^
-//  ! means "is NOT an integer"
-    responseEl.innerText = "Please enter a whole number!"
-    responseEl.style.color = "red"
+if (guess === 0 || guess === ""){
+    responseEl.innerText = "Please enter a valid input"
+    attemptEl.innerText = ""
     return
 }
-    
 
-    
+attempt += 1
 
-  attempts += 1
-    attemptsEl.innerText = "Attempts: " + attempts
+    if (guess<number){
+        responseEl.innerText = "Too low"
+        attemptEl.innerText = "Attempt: " + attempt
+    }
 
-if (guess > number){
-responseEl.innerText = "Too high!"
+    else if (guess>number){
+        responseEl.innerText = "Too high"
+        attemptEl.innerText = "Attempt: " + attempt
+    }
+
+    else{
+        responseEl.innerText = "Correct!"
+        attemptEl.innerText = "Attempt: " + attempt
+    }
 }
-
-else if (guess < number){
-    responseEl.innerText = "Too Low"
-}
-
-else {
-    responseEl.innerText = "Correct! You got it in " + attempts + " attempts!"
-    document.getElementById("button").disabled = true;
-    document.getElementById("input-el").disabled = true;
-}
-}
-
